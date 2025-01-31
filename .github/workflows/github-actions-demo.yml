@@ -25,8 +25,8 @@ jobs:
 
     - name: Ajouter et pousser les résultats
       run: |
-        git config --local user.email "ton_email@example.com"
-        git config --local user.name "Ton Nom"
+        git config --local user.email "romu.zami@gmail.com"
+        git config --local user.name "Romu"
         git add .
         git commit -m "Mise à jour des résultats" || echo "Aucun changement à pousser"
         git push
