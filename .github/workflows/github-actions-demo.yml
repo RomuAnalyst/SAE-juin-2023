@@ -1,34 +1,29 @@
-name: R Script Execution
+```yaml
+name: R Script Runner
 
 on:
-  schedule:
-    - cron: '25 1 * * *'  # Exécute le workflow tous les jours à 01:25 UTC
+  push:
+    branches:
+      - main  # Changez 'main' par le nom de votre branche si nécessaire
 
 jobs:
   run-r-script:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Vérifier le code
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Installer R
-      uses: r-lib/actions/setup-r@v2
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          R-version: '4.1'  # Indiquez la version R que vous souhaitez utiliser
 
-    - name: Installer les dépendances
-      run: |
-        Rscript -e 'install.packages(c("dplyr", "ggplot2"))'  # Ajoute les packages nécessaires
+      - name: Install dependencies
+        run: |
+          R -e 'install.packages("dplyr")'  # Modifiez en fonction de vos dépendances
 
-    - name: Exécuter le script R
-      run: |
-        app_initial_test.R  # Remplace par le nom de ton script
-
-    - name: Ajouter et pousser les résultats
-      run: |
-        git config --local user.email "romu.zami@gmail.com"
-        git config --local user.name "Romu"
-        git add .
-        git commit -m "Mise à jour des résultats" || echo "Aucun changement à pousser"
-        git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run R script
+        run: |
+          Rscript path/to/your_script.R  # Remplacez 'path/to/your_script.R' par le chemin de votre script
+```
