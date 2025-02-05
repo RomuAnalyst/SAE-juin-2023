@@ -1,4 +1,4 @@
-```yaml
+yaml
 name: R Script Runner
 
 on:
@@ -26,4 +26,3 @@ jobs:
       - name: Run R script
         run: |
           Rscript app_initial_test.R  # Remplacez 'path/to/your_script.R' par le chemin de votre script
-```
